@@ -1,0 +1,34 @@
+name: Deploy to WordPress.org
+
+# Publishing a GitHub release (tag = plugin version, e.g. 2.0.1) commits this code to
+# the plugin's WordPress.org SVN repository: trunk, plus tags/<version>.
+# Needs two repository secrets: SVN_USERNAME (snap1) and SVN_PASSWORD (the SVN password
+# generated in the WordPress.org profile, not the account password).
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Publish to the WordPress.org plugin directory
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches the plugin version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          TAG="${TAG#v}"
+          grep -Eq "^Stable tag: ${TAG}$" readme.txt || { echo "readme.txt Stable tag is not ${TAG}"; exit 1; }
+          grep -Eq "Version: +${TAG}$" snap-pay-for-woocommerce.php || { echo "The plugin header Version is not ${TAG}"; exit 1; }
+
+      - name: Commit to WordPress.org SVN
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: snap-pay-for-woocommerce

@@ -1,0 +1,73 @@
+/* Snap Pay admin styling: settings screen and the order-screen escrow panel. */
+
+.snappay-status {
+	padding: 0.6em 0.9em;
+	border-left: 4px solid #ccc;
+	background: #fff;
+}
+
+.snappay-status.is-connected {
+	border-left-color: #2c7a4b;
+}
+
+.snappay-status.is-disconnected {
+	border-left-color: #d63638;
+}
+
+.snappay-webhook-url {
+	display: inline-block;
+	padding: 0.35em 0.6em;
+	word-break: break-all;
+}
+
+.snappay-wallet {
+	max-width: 38em;
+}
+
+.snappay-escrow-box .snappay-escrow-state {
+	margin-top: 0;
+}
+
+.snappay-escrow-box .snappay-ref {
+	font-family: monospace;
+	font-size: 0.85em;
+	opacity: 0.8;
+}
+
+.snappay-amounts {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0.5em 0;
+}
+
+.snappay-amounts th,
+.snappay-amounts td {
+	padding: 0.25em 0;
+	text-align: left;
+	font-weight: 400;
+	vertical-align: top;
+}
+
+.snappay-amounts th {
+	opacity: 0.75;
+	padding-right: 0.75em;
+}
+
+.snappay-amounts td {
+	text-align: right;
+	font-weight: 600;
+}
+
+.snappay-code-input {
+	width: 100%;
+	font-family: monospace;
+	font-size: 1.25rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	padding: 0.4em;
+}
+
+.snappay-hint {
+	font-size: 0.85em;
+	opacity: 0.8;
+}

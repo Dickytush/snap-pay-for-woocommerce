@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.zip binary
+
+# Kept out of the WordPress.org build (the deploy action uses git archive).
+/.gitattributes export-ignore
+/.github export-ignore
+/README.md export-ignore

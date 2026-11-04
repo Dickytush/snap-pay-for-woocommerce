@@ -1,0 +1,111 @@
+/* Snap Pay checkout styling. Mobile-first and deliberately light: the target device
+   is a budget Android handset on 3G (FX-CHECKOUT-UX.md section 6). */
+
+.snappay-payment-fields {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.snappay-payment-fields input[type='tel'] {
+	width: 100%;
+	max-width: 22em;
+	padding: 0.6em;
+	font-size: 1rem;
+}
+
+.snappay-escrow-note {
+	margin: 0.75em 0 0;
+	font-size: 0.85rem;
+	opacity: 0.85;
+}
+
+.snappay-fx-total td {
+	font-size: 1.15rem;
+}
+
+.snappay-fx-countdown {
+	display: inline-block;
+	margin-top: 0.25em;
+	font-variant-numeric: tabular-nums;
+}
+
+.snappay-fx-expired {
+	color: #b32d2e;
+	font-weight: 600;
+}
+
+.snappay-local-price {
+	font-weight: 700;
+}
+
+.snappay-store-price {
+	opacity: 0.65;
+	font-size: 0.9em;
+}
+
+.snappay-rate-note {
+	display: block;
+	opacity: 0.75;
+}
+
+/* Provider logos. Height-capped rather than width-capped: the marks have very
+   different aspect ratios (m-pesa is nearly square, MoMo is wide), so a common
+   height is what makes the rows line up. */
+.snappay-gateway-icon,
+.snappay-blocks-icon {
+	max-height: 24px;
+	width: auto;
+	vertical-align: middle;
+}
+
+.snappay-gateway-icon {
+	float: none;
+	margin-left: 0.5em;
+}
+
+.snappay-blocks-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55em;
+}
+
+.snappay-blocks-field label {
+	display: block;
+	margin-bottom: 0.35em;
+	font-weight: 600;
+}
+
+.snappay-blocks-field input {
+	width: 100%;
+	padding: 0.6em;
+	font-size: 1rem;
+}
+
+.snappay-blocks-fx {
+	margin: 0.9em 0;
+	padding: 0.75em;
+	border: 1px solid currentColor;
+	border-radius: 4px;
+}
+
+.snappay-blocks-fx-amount {
+	margin: 0 0 0.25em;
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.snappay-blocks-fx-rate,
+.snappay-blocks-fx-timer {
+	margin: 0;
+	font-size: 0.85rem;
+}
+
+.snappay-blocks-fx-timer {
+	font-variant-numeric: tabular-nums;
+}
+
+.snappay-blocks-escrow {
+	font-size: 0.85rem;
+	opacity: 0.85;
+}

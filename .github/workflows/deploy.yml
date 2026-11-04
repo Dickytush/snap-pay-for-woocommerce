@@ -26,6 +26,9 @@ jobs:
           grep -Eq "^Stable tag: ${TAG}$" readme.txt || { echo "readme.txt Stable tag is not ${TAG}"; exit 1; }
           grep -Eq "Version: +${TAG}$" snap-pay-for-woocommerce.php || { echo "The plugin header Version is not ${TAG}"; exit 1; }
 
+      - name: Install Subversion
+        run: command -v svn || (sudo apt-get update -qq && sudo apt-get install -y -qq subversion)
+
       - name: Commit to WordPress.org SVN
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:

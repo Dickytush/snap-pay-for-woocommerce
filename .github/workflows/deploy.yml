@@ -1,7 +1,8 @@
 name: Deploy to WordPress.org
 
 # Publishing a GitHub release (tag = plugin version, e.g. 2.0.1) commits this code to
-# the plugin's WordPress.org SVN repository: trunk, plus tags/<version>.
+# the plugin's WordPress.org SVN repository: trunk, plus tags/<version>. It then attaches
+# snap-pay-for-woocommerce.zip to the release, so merchants can also install from GitHub.
 # Needs two repository secrets: SVN_USERNAME (snap1) and SVN_PASSWORD (the SVN password
 # generated in the WordPress.org profile, not the account password).
 
@@ -10,14 +11,14 @@ on:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write # attach the plugin zip to the release
 
 jobs:
   deploy:
     name: Publish to the WordPress.org plugin directory
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Check the tag matches the plugin version
         run: |
@@ -30,8 +31,17 @@ jobs:
         run: command -v svn || (sudo apt-get update -qq && sudo apt-get install -y -qq subversion)
 
       - name: Commit to WordPress.org SVN
+        id: deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: snap-pay-for-woocommerce
+
+      - name: Attach the plugin zip to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZIP_PATH: ${{ steps.deploy.outputs.zip-path }}
+        run: gh release upload "${GITHUB_REF#refs/tags/}" "$ZIP_PATH" --clobber --repo "$GITHUB_REPOSITORY"

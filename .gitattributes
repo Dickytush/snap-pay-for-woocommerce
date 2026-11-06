@@ -7,3 +7,4 @@
 /.gitattributes export-ignore
 /.github export-ignore
 /README.md export-ignore
+/SECURITY.md export-ignore
